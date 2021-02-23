@@ -4,18 +4,12 @@
   "description": "Application developed for Stone's selective process",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
-  },
-  "lint-staged": {
-    "*.js": [
-      "standard"
-    ]
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Carlos Eduardo Alves de Lima",
   "license": "ISC",
   "devDependencies": {
     "husky": "^5.1.1",
-    "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "standard": "^16.0.3"
   }
