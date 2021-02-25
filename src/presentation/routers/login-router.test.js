@@ -1,10 +1,14 @@
 const LoginRouter = require('../routers/login-router')
 const MissingParamError = require('../routers/helpers/missing-param-error')
 
+// factore design pattern
+const makeSut = () => {
+  return new LoginRouter()
+}
 describe('Login Router', () => {
   test('should return 400 if no email is provided', () => {
     //  sut: system under test
-    const sut = new LoginRouter()
+    const sut = makeSut()
     const httpResquest = {
       body: {
         password: 'password'
@@ -16,7 +20,7 @@ describe('Login Router', () => {
   })
 
   test('should return 400 if no password is provided', () => {
-    const sut = new LoginRouter()
+    const sut = makeSut()
     const httpResquest = {
       body: {
         email: 'email'
@@ -28,14 +32,14 @@ describe('Login Router', () => {
   })
 
   test('should return 500 if no httpRequest is provided', () => {
-    const sut = new LoginRouter()
+    const sut = makeSut()
     const httpResponse = sut.route()
 
     expect(httpResponse.statusCode).toBe(500)
   })
 
   test('should return 500 if no body is provided', () => {
-    const sut = new LoginRouter()
+    const sut = makeSut()
     const httpRequest = {}
     const httpResponse = sut.route(httpRequest)
 
