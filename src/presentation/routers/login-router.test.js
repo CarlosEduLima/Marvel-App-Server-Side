@@ -1,5 +1,6 @@
 const LoginRouter = require('../routers/login-router')
 const MissingParamError = require('../routers/helpers/missing-param-error')
+const UnauthorizedError = require('../routers/helpers/unauthorized-error')
 
 // factore design pattern
 const makeSut = () => {
@@ -85,5 +86,6 @@ describe('Login Router', () => {
     const httpResponse = sut.route(httpRequest)
 
     expect(httpResponse.statusCode).toBe(401)
+    expect(httpResponse.body).toEqual(new UnauthorizedError())
   })
 })
