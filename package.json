@@ -4,10 +4,11 @@
   "description": "Application developed for Stone's selective process",
   "main": "index.js",
   "scripts": {
-    "test": "jest --passWithNoTests ",
-    "test:unit": "npm test jest --watchAll  --passWithNoTests -c jest-unit-config.js",
-    "test:staged": "npm test jest --passWithNoTests --findRelatedTests",
-    "test:ci": "npm test jest --coverage"
+    "test": "jest --passWithNoTests",
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "test:integration": "npm test -- -c jest-integration-config.js",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:ci": "npm test -- --coverage"
   },
   "standard": {
     "env": [
