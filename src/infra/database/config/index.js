@@ -1,12 +1,14 @@
 const enviromentLocal = {
-  username: process.env.LOCAL_DB_USERNAME,
-  password: process.env.LOCAL_DB_PASSWORD,
-  database: process.env.LOCAL_DB_DATABASE,
-  host: process.env.LOCAL_DB_HOST,
+  username: 'postgres',
+  password: 'postgres',
+  database: 'marvel-app',
+  host: '127.0.0.1',
   dialect: 'postgres',
   logging: true,
   define: {
-    timestamps: true
+    timestamps: true,
+    underscored: true
   }
 }
+
 module.exports = enviromentLocal
