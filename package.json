@@ -4,7 +4,8 @@
   "description": "Application developed for Stone's selective process",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest --passWithNoTests ",
+    "test:unit": "npm test jest --watchAll  --passWithNoTests -c jest-unit-config.js",
     "test:staged": "jest --passWithNoTests --findRelatedTests",
     "test:ci": "jest --coverage"
   },
