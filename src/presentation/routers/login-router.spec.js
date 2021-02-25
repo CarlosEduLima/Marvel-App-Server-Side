@@ -1,6 +1,6 @@
 const LoginRouter = require('./login-router')
-const { MissingParamError, UnauthorizedError, ServerError, InvalidParamError } = require('../errors')
-
+const { UnauthorizedError, ServerError } = require('../errors')
+const { MissingParamError, InvalidParamError } = require('../../utils/errors')
 // factore design pattern
 const makeSut = () => {
   // Mock class to test login router
