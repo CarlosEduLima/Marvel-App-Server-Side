@@ -9,9 +9,11 @@ const makeSut = () => {
     auth (email, password) {
       this.email = email
       this.password = password
+      return this.acessToken
     }
   }
   const authUseCaseSpy = new AuthUserCaseSpy()
+  authUseCaseSpy.acessToken = 'valid_token'
   // dependency injection
   const sut = new LoginRouter(authUseCaseSpy)
   return {
@@ -75,8 +77,9 @@ describe('Login Router', () => {
     expect(authUseCaseSpy.password).toBe(httpRequest.body.password)
   })
 
-  test('should return 401 if invalid credentials are proviaded', () => {
-    const { sut } = makeSut()
+  test('should return 401 if invalid credentials are provided', () => {
+    const { sut, authUseCaseSpy } = makeSut()
+    authUseCaseSpy.acessToken = null
     const httpRequest = {
       body: {
         email: 'invalid_email',
@@ -87,6 +90,19 @@ describe('Login Router', () => {
 
     expect(httpResponse.statusCode).toBe(401)
     expect(httpResponse.body).toEqual(new UnauthorizedError())
+  })
+
+  test('should return 200 if invalid credentials are provided', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        email: 'valid_email',
+        password: 'valid_password'
+      }
+    }
+    const httpResponse = sut.route(httpRequest)
+
+    expect(httpResponse.statusCode).toBe(200)
   })
 
   test('should return 500 if no AuthUseCase are proviaded', () => {
