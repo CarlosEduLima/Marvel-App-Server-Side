@@ -2,18 +2,32 @@ const LoginRouter = require('../routers/login-router')
 const MissingParamError = require('../routers/helpers/missing-param-error')
 const UnauthorizedError = require('../routers/helpers/unauthorized-error')
 const ServerError = require('../routers/helpers/server-error')
+const InvalidParamError = require('../routers/helpers/invalid-param-error')
 
 // factore design pattern
 const makeSut = () => {
   // Mock class to test login router
+  const emailValidatorSpy = makeEmailValidator()
   const authUseCaseSpy = makeAuthUseCaseSpy()
   authUseCaseSpy.accessToken = 'valid_token'
   // dependency injection
-  const sut = new LoginRouter(authUseCaseSpy)
+  const sut = new LoginRouter(authUseCaseSpy, emailValidatorSpy)
   return {
     sut,
-    authUseCaseSpy
+    authUseCaseSpy,
+    emailValidatorSpy
   }
+}
+
+const makeEmailValidator = () => {
+  class EmailValidatorSpy {
+    isValid (email) {
+      return this.isEmailValid
+    }
+  }
+  const emailValidatorSpy = new EmailValidatorSpy()
+  emailValidatorSpy.isEmailValid = true
+  return emailValidatorSpy
 }
 const makeAuthUseCaseWithError = () => {
   class AuthUserCaseSpy {
@@ -162,5 +176,19 @@ describe('Login Router', () => {
     }
     const httpResponse = await sut.route(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
+  })
+
+  test('should return 400 if invalid email is provided', async () => {
+    const { sut, emailValidatorSpy } = makeSut()
+    emailValidatorSpy.isEmailValid = false
+    const httpResquest = {
+      body: {
+        email: 'invalid_email@mail.com',
+        password: 'password'
+      }
+    }
+    const httpResponse = await sut.route(httpResquest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new InvalidParamError('email'))
   })
 })
