@@ -7,6 +7,11 @@ module.exports = {
     password: process.env.LOCAL_DB_PASSWORD,
     host: process.env.LOCAL_DB_HOST,
     port: process.env.LOCAL_DB_PORT,
+    define: {
+      timestamps: true,
+      underscored: true,
+      underscoredAll: true
+    },
     dialect: 'postgres',
     logging: true
   },
