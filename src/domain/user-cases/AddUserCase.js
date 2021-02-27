@@ -1,7 +1,6 @@
 const HttpResponse = require('../../presentation/helpers/http-response')
 const { MissingParamError, InvalidParamError } = require('../../utils/errors')
 const UserDb = require('../../infra/users')
-
 module.exports = {
   async AddUserCase (user) {
     try {
