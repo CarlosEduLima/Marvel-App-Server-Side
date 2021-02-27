@@ -1,15 +1,27 @@
 const query = ({ connects, models }) => {
   return Object.freeze({
-    insertNewUser
+    insertNewUser,
+    findUserByEmail
   })
 
   async function insertNewUser (data) {
     try {
       const User = models.User
-      const res = await User.create(data.body)
-      return res
+      await User.create(data)
+      return {
+        success: true
+      }
     } catch (e) {
-      console.log('Error: ', e)
+      return { success: false, error: e }
+    }
+  }
+  async function findUserByEmail (email) {
+    const User = models.User
+    const user = await User.findOne({
+      where: { email: email }
+    })
+    return {
+      user
     }
   }
 }
