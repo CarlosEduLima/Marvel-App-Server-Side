@@ -9,6 +9,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.removeColumn('users', 'reset-password-token')
+    return queryInterface.removeColumn('users', 'reset_password_token')
   }
 }
