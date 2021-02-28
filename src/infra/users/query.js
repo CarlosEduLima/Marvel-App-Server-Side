@@ -81,9 +81,10 @@ const query = ({ connects, models }) => {
       return { success: false, error: e }
     }
   }
-  async function updateUserEmail (user, email) {
+  async function updateUserEmail (user, newEmail) {
     try {
-      await user.update(email)
+      user.email = newEmail
+      await user.save()
       return {
         success: true
       }
