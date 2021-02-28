@@ -10,7 +10,7 @@ module.exports = {
       return HttpResponse
     }
 
-    const passwordHash = createHash(httpRequest.body.password)
+    const passwordHash = await createHash(httpRequest.body.password)
     if (!passwordHash) {
       return HttpResponse.serverError()
     }
