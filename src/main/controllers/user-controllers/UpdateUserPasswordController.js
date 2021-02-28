@@ -2,6 +2,7 @@ const { GetUserCase } = require('../../../domain/user-cases/GetUserCase')
 const { UpdateUserPasswordCase } = require('../../../domain/user-cases/UpdateUserPasswordCase')
 const HttpResponse = require('../../../presentation/helpers/http-response')
 const { InvalidParamError } = require('../../../utils/errors')
+const { createHash } = require('../../../utils/encrypter')
 const UserDb = require('../../../infra/users')
 module.exports = {
   async UpdateUserPasswordController (httpRequest) {
@@ -10,11 +11,15 @@ module.exports = {
       const HttpResponse = validation.error
       return HttpResponse
     }
-    const checkPassword = await UpdateUserPasswordCase(validation.user, httpRequest.body.oldPassword)
-    if (!checkPassword) {
+    const checkedPassword = await UpdateUserPasswordCase(validation.user, httpRequest.body.oldPassword)
+    if (!checkedPassword.success) {
       return HttpResponse.badRequest(new InvalidParamError('Password'))
     }
-    const response = await UserDb.updateUserPassword(validation.user, httpRequest.body.newPassword)
+    const passwordHash = await createHash(httpRequest.body.newPassword)
+    if (!passwordHash) {
+      return HttpResponse.serverError()
+    }
+    const response = await UserDb.updateUserPassword(validation.user, passwordHash)
     if (!response.success) {
       return HttpResponse.serverError()
     }
