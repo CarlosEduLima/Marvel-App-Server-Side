@@ -25,7 +25,8 @@ module.exports = {
         }
       }
       return {
-        validated: true
+        validated: true,
+        user: databaseQuery.user
       }
     } catch (e) {
       return HttpResponse.serverError()

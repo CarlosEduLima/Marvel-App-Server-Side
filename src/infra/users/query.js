@@ -60,9 +60,10 @@ const query = ({ connects, models }) => {
     }
   }
 
-  async function updateUserName (user, name) {
+  async function updateUserName (user, newName) {
     try {
-      await user.update(name)
+      user.name = newName
+      await user.save()
       return {
         success: true
       }
