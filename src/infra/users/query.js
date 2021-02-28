@@ -48,7 +48,6 @@ const query = ({ connects, models }) => {
       password
     }
   }
-
   async function deleteUser (user) {
     try {
       await user.destroy()
