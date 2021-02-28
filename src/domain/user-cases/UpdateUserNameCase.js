@@ -1,15 +1,15 @@
 const HttpResponse = require('../../presentation/helpers/http-response')
 const UserDb = require('../../infra/users')
 module.exports = {
-  async UpdadeUserNameCase (name) {
+  async UpdadeUserNameCase (user, name) {
     try {
-      if (!name) {
+      if (!name || !user) {
         return {
           validated: false,
           error: HttpResponse.serverError()
         }
       }
-      const response = await UserDb.updateUserName(name)
+      const response = await UserDb.updateUserName(user, name)
       if (!response.success) {
         return { validated: false, error: HttpResponse.serverError() }
       }
