@@ -1,5 +1,4 @@
 {
     "standard.enable": true,
-    "explorer.compactFolders": false,
-    "editor.fontSize": 16
+    "explorer.compactFolders": false
 }

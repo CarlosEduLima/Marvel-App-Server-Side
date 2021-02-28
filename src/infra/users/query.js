@@ -63,9 +63,10 @@ const query = ({ connects, models }) => {
   async function updateUserPasswordToken (user, token) {
     try {
       user.reset_password_token = token
-      await user.save()
+      const res = await user.save()
       return {
-        success: true
+        success: true,
+        user: res
       }
     } catch (e) {
       return { success: false, error: e }

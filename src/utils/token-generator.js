@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const MissingParamError = require('../errors/missing-param-error')
+const { MissingParamError } = require('./errors')
 module.exports = {
   async  generate (secret, id, expires) {
     if (!secret) {

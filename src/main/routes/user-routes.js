@@ -5,6 +5,7 @@ const updateUserNameRoute = require('../../presentation/routers/update-user-name
 const updateUserEmailRoute = require('../../presentation/routers/update-user-email-router')
 const deleteUserRouter = require('../../presentation/routers/delete-user-router')
 const updateUserPasswordRouter = require('../../presentation/routers/update-user-password-router')
+const authUserRouter = require('../../presentation/routers/auth-user-router')
 module.exports = router => {
   router.post('/sign-up', adpter(addUserRoute()))
   router.get('/user/:id', adpter(getUserRoute()))
@@ -12,4 +13,5 @@ module.exports = router => {
   router.put('/user-email/:id', adpter(updateUserEmailRoute()))
   router.put('/reset-password/:id', adpter(updateUserPasswordRouter()))
   router.delete('/user/:id', adpter(deleteUserRouter()))
+  router.post('/login', adpter(authUserRouter()))
 }
