@@ -72,7 +72,8 @@ const query = ({ connects, models }) => {
   }
   async function updateUserPassword (user, password) {
     try {
-      await user.update(password)
+      user.password = password
+      await user.save()
       return {
         success: true
       }
