@@ -7,7 +7,8 @@ const query = ({ connects, models }) => {
     deleteUser,
     updateUserName,
     updateUserEmail,
-    updateUserPassword
+    updateUserPassword,
+    updateUserPasswordToken
   })
 
   async function insertNewUser (data) {
@@ -51,6 +52,18 @@ const query = ({ connects, models }) => {
   async function deleteUser (user) {
     try {
       await user.destroy()
+      return {
+        success: true
+      }
+    } catch (e) {
+      return { success: false, error: e }
+    }
+  }
+
+  async function updateUserPasswordToken (user, token) {
+    try {
+      user.reset_password_token = token
+      await user.save()
       return {
         success: true
       }
