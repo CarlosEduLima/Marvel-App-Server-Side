@@ -18,6 +18,6 @@ module.exports = {
     if (!response.success) {
       return HttpResponse.serverError()
     }
-    return HttpResponse.ok('Usuário Deletado')
+    return HttpResponse.ok('Senha alterada')
   }
 }
