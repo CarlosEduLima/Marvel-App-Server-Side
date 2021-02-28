@@ -1,7 +1,13 @@
 const query = ({ connects, models }) => {
   return Object.freeze({
     insertNewUser,
-    findUserByEmail
+    findUserByEmail,
+    findUserById,
+    getUserPassword,
+    deleteUser,
+    updateUserName,
+    updateUserEmail,
+    updateUserPassword
   })
 
   async function insertNewUser (data) {
@@ -22,6 +28,66 @@ const query = ({ connects, models }) => {
     })
     return {
       user
+    }
+  }
+  async function findUserById (userId) {
+    const User = models.User
+    const user = await User.findOne({
+      where: { id: userId }
+    })
+    return {
+      user
+    }
+  }
+  async function getUserPassword (userId) {
+    const User = models.User
+    const { password } = await User.findOne({
+      where: { id: userId }
+    })
+    return {
+      password
+    }
+  }
+
+  async function deleteUser (user) {
+    try {
+      await user.destroy()
+      return {
+        success: true
+      }
+    } catch (e) {
+      return { success: false, error: e }
+    }
+  }
+
+  async function updateUserName (user, name) {
+    try {
+      await user.update(name)
+      return {
+        success: true
+      }
+    } catch (e) {
+      return { success: false, error: e }
+    }
+  }
+  async function updateUserPassword (user, password) {
+    try {
+      await user.update(password)
+      return {
+        success: true
+      }
+    } catch (e) {
+      return { success: false, error: e }
+    }
+  }
+  async function updateUserEmail (user, email) {
+    try {
+      await user.update(email)
+      return {
+        success: true
+      }
+    } catch (e) {
+      return { success: false, error: e }
     }
   }
 }
