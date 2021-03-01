@@ -25,10 +25,15 @@ module.exports = {
   },
   production: {
     username: process.env.PRODUCTION_DB_USERNAME,
-    database: process.env.PRODUCTION_DB_DATABASE,
     password: process.env.PRODUCTION_DB_PASSWORD,
-    port: process.env.PRODUCTION_DB_PORT,
+    database: process.env.PRODUCTION_DB_DATABASE,
     host: process.env.PRODUCTION_DB_HOST,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // <<<<<<< YOU NEED THIS
+      }
+    }
   }
 }

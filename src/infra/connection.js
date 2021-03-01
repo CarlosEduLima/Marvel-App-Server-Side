@@ -19,7 +19,10 @@ const connect = ({ dotenv, pg }) => {
         database: process.env.PRODUCTION_DB_DATABASE,
         password: process.env.PRODUCTION_DB_PASSWORD,
         port: process.env.PRODUCTION_DB_PORT,
-        host: process.env.PRODUCTION_DB_HOST
+        host: process.env.PRODUCTION_DB_HOST,
+        ssl: {
+          rejectUnauthorized: false
+        }
       }
     }
 
