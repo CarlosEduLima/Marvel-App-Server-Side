@@ -10,8 +10,8 @@ module.exports = {
       return HttpResponse
     }
 
-    const token = await TokenGenerator.generate(process.env.SECRET, validation.id, 60 * 60 * 24)
+    const token = await TokenGenerator.generate(process.env.SECRET, validation.user.id, 60 * 60 * 24)
 
-    return HttpResponse.ok({ token: token })
+    return HttpResponse.ok({ token: token, user: validation.user })
   }
 }

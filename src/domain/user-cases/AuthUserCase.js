@@ -30,7 +30,7 @@ module.exports = {
 
       return {
         validated: true,
-        id: user.user.id
+        user: user.user
       }
     } catch (error) {
       console.log(error)
