@@ -15,11 +15,11 @@ const connect = ({ dotenv, pg }) => {
     }
     if (env === 'production') {
       config = {
-        user: process.env.PGUSER,
-        database: process.env.PGDATABASE,
-        password: process.env.PGPASSWORD,
-        port: process.env.PGPORT,
-        host: process.env.PGHOST
+        user: process.env.PRODUCTION_DB_USERNAME,
+        database: process.env.PRODUCTION_DB_DATABASE,
+        password: process.env.PRODUCTION_DB_PASSWORD,
+        port: process.env.PRODUCTION_DB_PORT,
+        host: process.env.PRODUCTION_DB_HOST
       }
     }
 

@@ -24,10 +24,11 @@ module.exports = {
     logging: false
   },
   production: {
-    username: 'root',
-    password: null,
-    database: 'database_production',
-    host: '127.0.0.1',
+    username: process.env.PRODUCTION_DB_USERNAME,
+    database: process.env.PRODUCTION_DB_DATABASE,
+    password: process.env.PRODUCTION_DB_PASSWORD,
+    port: process.env.PRODUCTION_DB_PORT,
+    host: process.env.PRODUCTION_DB_HOST,
     dialect: 'postgres'
   }
 }
