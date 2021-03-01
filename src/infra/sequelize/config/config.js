@@ -28,6 +28,11 @@ module.exports = {
     password: process.env.PRODUCTION_DB_PASSWORD,
     database: process.env.PRODUCTION_DB_DATABASE,
     host: process.env.PRODUCTION_DB_HOST,
+    define: {
+      timestamps: true,
+      underscored: true,
+      underscoredAll: true
+    },
     dialect: 'postgres',
     dialectOptions: {
       ssl: {

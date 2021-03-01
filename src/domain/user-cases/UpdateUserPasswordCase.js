@@ -12,7 +12,7 @@ module.exports = {
         }
       }
 
-      const passwordHash = await UserDb.getUserPassword(user.id)
+      const passwordHash = await UserDb.getUserPassword(httpRequest.params.id)
       const validatePassword = await compareHash(oldPassword, passwordHash.password)
       if (!validatePassword) {
         return {

@@ -2,22 +2,18 @@ const { ForgotPasswordCase } = require('../../../domain/user-cases/ForgotPasswor
 const HttpResponse = require('../../../presentation/helpers/http-response')
 const UserDb = require('../../../infra/users')
 require('dotenv').config()
-const TokenGenerator = require('../../../utils/token-generator')
 module.exports = {
   async ForgotPasswordController (httpRequest) {
     const validation = await ForgotPasswordCase(httpRequest)
     if (!validation.validated) {
-      const HttpResponse = validation.error
-      return HttpResponse
+      const { error } = validation
+      return error
     }
-
-    const token = await TokenGenerator.generate(process.env.SECRET, validation.userData.id, 60 * 30)
-    const response = await UserDb.updateUserPasswordToken(validation.userData, token)
-
+    const response = await UserDb.updateUserPassword(validation.userData, httpRequest.newPassword)
     if (!response.success) {
       return HttpResponse.serverError()
     }
 
-    return HttpResponse.ok('Token gerado')
+    return HttpResponse.ok('Senha atualizada')
   }
 }

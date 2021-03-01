@@ -6,8 +6,8 @@ module.exports = {
   async AddUserController (httpRequest) {
     const validation = await AddUserCase(httpRequest)
     if (!validation.validated) {
-      const HttpResponse = validation.error
-      return HttpResponse
+      const { error } = validation
+      return error
     }
 
     const passwordHash = await createHash(httpRequest.body.password)

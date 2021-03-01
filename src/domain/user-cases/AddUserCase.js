@@ -31,7 +31,7 @@ module.exports = {
         validated: true
       }
     } catch (e) {
-      return HttpResponse.serverError()
+      console.log(e)
     }
   }
 }

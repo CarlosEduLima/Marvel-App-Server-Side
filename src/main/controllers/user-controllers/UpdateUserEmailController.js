@@ -5,8 +5,8 @@ module.exports = {
   async UpdateUserEmailController (httpRequest) {
     const validation = await GetUserCase(httpRequest)
     if (!validation.validated) {
-      const HttpResponse = validation.error
-      return HttpResponse
+      const { error } = validation
+      return error
     }
 
     const updateUserEmail = await UpdateUserEmailCase(validation.user, httpRequest.body.email)

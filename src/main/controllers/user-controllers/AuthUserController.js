@@ -6,8 +6,8 @@ module.exports = {
   async AuthUserController (httpRequest) {
     const validation = await AuthUserCase(httpRequest)
     if (!validation.validated) {
-      const HttpResponse = validation.error
-      return HttpResponse
+      const { error } = validation
+      return error
     }
 
     const token = await TokenGenerator.generate(process.env.SECRET, validation.user.id, 60 * 60 * 24)

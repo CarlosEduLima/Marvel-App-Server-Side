@@ -7,8 +7,8 @@ module.exports = {
   async UpdateUserPasswordController (httpRequest) {
     const user = await GetUserCase(httpRequest)
     if (!user.validated) {
-      const HttpResponse = user.error
-      return HttpResponse
+      const { error } = user
+      return error
     }
     const validate = await UpdateUserPasswordCase(user.user, httpRequest)
     if (!validate.validated) {

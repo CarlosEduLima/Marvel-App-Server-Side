@@ -4,10 +4,9 @@ module.exports = {
   async GetUserController (httpRequest) {
     const validation = await GetUserCase(httpRequest)
     if (!validation.validated) {
-      const HttpResponse = validation.error
-      return HttpResponse
+      const { erro } = validation
+      return erro
     }
-
     return HttpResponse.ok(validation)
   }
 }

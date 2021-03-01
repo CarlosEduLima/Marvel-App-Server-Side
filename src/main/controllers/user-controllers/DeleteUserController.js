@@ -7,8 +7,8 @@ module.exports = {
   async DeleteUserController (httpRequest) {
     const validation = await GetUserCase(httpRequest)
     if (!validation.validated) {
-      const HttpResponse = validation.error
-      return HttpResponse
+      const { error } = validation
+      return error
     }
     const checkPassword = DeleteUserCase(validation.user, httpRequest.body.password)
     if (!checkPassword) {

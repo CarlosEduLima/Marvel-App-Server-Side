@@ -12,7 +12,7 @@ module.exports = router => {
   router.get('/user/:id', adpter(getUserRoute()))
   router.put('/user-name/:id', adpter(updateUserNameRoute()))
   router.put('/user-email/:id', adpter(updateUserEmailRoute()))
-  router.put('/reset-password/:id', adpter(updateUserPasswordRouter()))
+  router.put('/reset-password', adpter(updateUserPasswordRouter()))
   router.delete('/user/:id', adpter(deleteUserRouter()))
   router.post('/login', adpter(authUserRouter()))
   router.post('/forgot-password', adpter(ForgotPasswordRouter()))
