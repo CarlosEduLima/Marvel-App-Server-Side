@@ -1,4 +1,5 @@
 // connection to database;
+const { parse } = require('pg-connection-string')
 const connect = ({ dotenv, pg }) => {
   return async function conn () {
     dotenv.config()
@@ -40,7 +41,7 @@ const connect = ({ dotenv, pg }) => {
       }
     }
 
-    const pool = new Pool(config)
+    const pool = new Pool(parse(config))
 
     return pool
   }
