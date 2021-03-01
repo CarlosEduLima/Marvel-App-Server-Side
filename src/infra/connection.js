@@ -20,8 +20,12 @@ const connect = ({ dotenv, pg }) => {
         password: process.env.PRODUCTION_DB_PASSWORD,
         port: process.env.PRODUCTION_DB_PORT,
         host: process.env.PRODUCTION_DB_HOST,
-        ssl: {
-          rejectUnauthorized: false
+        dialect: 'postgres',
+        dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false // <<<<<<< YOU NEED THIS
+          }
         }
       }
     }
